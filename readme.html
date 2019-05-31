@@ -1,0 +1,78 @@
+<html><pre>
+The accompanying files assist with generating WRL files for 3D
+printing NEURON morphologies as described in:
+
+McDougal, R. A., & Shepherd, G. M. (2015). 3D-printer visualization of
+neuron models. Frontiers in Neuroinformatics, 9.
+
+Preconditions:
+
+    NEURON (with Python support) must be installed
+    cython must be installed
+    mayavi must be installed
+
+Begin by compiling the 3D files (only need to do this once):
+
+    cd geometry3d
+    python setup.py build_ext --inplace
+    cd ..
+
+Basic usage (produces a wrl file suitable for uploading to some 3D
+printing services at 200x magnification):
+
+    1. Open NEURON with Python from this folder (nrngui -python)
+    2. Import the morphology to print (Tools - Miscellaneous - Import
+       3D, load and edit, then Export - Instantiate)
+    3. from prepare_3dprintable import ctng
+    4. ctng()
+    5. A window will appear. Save as a WRL file (e.g. type:
+    myneuron.wrl)
+
+ctng supports many options, perhaps most importantly a magnification
+keyword argument. For the full list:
+
+    from prepare_3dprintable import ctng
+    help(ctng)
+
+For a demo that downloads a morphology, loads it in NEURON, and uses
+the prepare_3dprintable module to output a wrl file (output.wrl), run:
+
+    python demo.py
+
+Examine the demo.py code for an example of how to automate the 3D
+printable object generation process.
+
+The demo downloads the morphology c91662 from NeuroMorpho.Org. See:
+
+Ascoli, G. A., Donohue, D. E., & Halavi, M. (2007). NeuroMorpho. Org:
+a central resource for neuronal morphologies. The Journal of
+Neuroscience, 27(35), 9247-9251.
+
+Ishizuka, N., Cowan, W. M., & Amaral, D. G. (1995). A quantitative
+analysis of the dendritic organization of pyramidal cells in the rat
+hippocampus. Journal of Comparative Neurology, 362(1), 17-45.
+
+The soma in the demo will appear as a cylinder, but that is a property
+of the morphology file not of the 3D printing process in general.
+
+If (unlikely; depends on system configuration) you see an error like:
+
+    ValueError: cannot set toolkit to wx because it has already been
+    set to qt4
+
+Before running set the ETS_TOOLKIT to qt4; in the bash terminal, this
+is done by:
+
+    export ETS_TOOLKIT=qt4
+
+WRL files may be viewed, rescaled, and converted into other formats
+using a number of freely available tools. In the early stages of our
+work, we used Blender for this (blender.org); the Windows app 3D
+Builder can also be used as a viewer.
+
+Share your 3D printable morphologies on 3DModelDB
+(<a href="http://senselab.med.yale.edu/3dmodeldb">senselab.med.yale.edu/3dmodeldb</a>) by emailing them and pictures of the
+printouts to the 3DModelDB Administrator. A link for the email of the
+current Administrator is at the bottom of the page labeled: "Email the
+3DModelDB Administrator".
+</pre></html>
